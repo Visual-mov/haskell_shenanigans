@@ -1,12 +1,12 @@
-fizz: clean
-	ghc ./fizzbuzz.hs
+SRC = $(wildcard *.hs)
+EXECUTABLES = $(SRC:.hs=)
 
-keys: clean
-	ghc ./candidate_keys.hs
-
-rpn: clean
-	ghc ./rpn.hs
+all: $(EXECUTABLES)
+	
+%: %.hs
+	mkdir -p ./bin
+	-ghc -o "./bin/$@" $^
 
 clean:
 	rm -f *.o *.hi
-	rm -f candidate_keys fizzbuzz rpn
+	rm -r ./bin

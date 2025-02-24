@@ -8,12 +8,12 @@ doOp f (x:y:tail) = y `f` x : tail
 
 rpn :: [String] -> State -> State
 rpn [] state = reverse state
-rpn (t:rest) state = rpn rest (case t of
+rpn (t:tail) state = rpn tail (case t of
         "+" -> doOp (+) state
         "-" -> doOp (-) state
         "*" -> doOp (*) state
         "/" -> doOp (/) state
-        _ -> read t : state
+        _   -> read t : state
     )
 
 main :: IO()
